@@ -14,9 +14,11 @@ namespace TestMaze
         public CreerLabyrinthe()
         {
             ForegroundColor = ConsoleColor.Green;
+            SetWindowSize(100, 48);
             Menu1();
             Menu2();
             AfficherLabyrinthe();
+            
         }
 
         private void Menu1()
@@ -25,9 +27,9 @@ namespace TestMaze
             Clear();
             WriteLine("****BIENVENUE AU LABYRINTHE!****");
             WriteLine("Choisissez un labyrinthe :");
-            WriteLine("1 - Petit 7x7");
-            WriteLine("2 - Moyen 10x10");
-            WriteLine("3 - Grand 13x13");
+            WriteLine("1 - Petit 10x10");
+            WriteLine("2 - Moyen 15x15");
+            WriteLine("3 - Grand 20x20");
             Write("Votre choix : ");
             choix = ReadLine();
             InitialiserLabyrinthe(choix);
@@ -51,13 +53,13 @@ namespace TestMaze
             switch (choix)
             {
                 case "1":
-                    grid = new Grid(7, 7);
-                    break;
-                case "2":
                     grid = new Grid(10, 10);
                     break;
+                case "2":
+                    grid = new Grid(15, 15);
+                    break;
                 case "3":
-                    grid = new Grid(13, 13);
+                    grid = new Grid(20, 20);
                     break;
                 default:
                     Write("Choix incorrect!");
