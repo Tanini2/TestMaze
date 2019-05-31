@@ -158,9 +158,20 @@ namespace TestMaze
                 var bottom = "+";
                 foreach(var cell in row)
                 {
+                    var east = "";
                     const string body = "   ";
-                    var east = cell.IsLinked(cell.East) ? " " : "|";
-
+                    if(cell.Row == Rows - 1 && cell.Column == Columns - 1)
+                    {
+                        east = " ";
+                    }
+                    else
+                    {
+                        east = cell.IsLinked(cell.East) ? " " : "|";
+                    }
+                    if(cell.Row == 0 && cell.Column == 0)
+                    {
+                        top = " ";
+                    }
                     top += body + east;
 
                     var south = cell.IsLinked(cell.South) ? "   " : "---";
