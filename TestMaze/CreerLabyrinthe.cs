@@ -102,13 +102,15 @@ namespace TestMaze
             WriteLine("Utilisez les flèches pour vous déplacer.");
             WriteLine("Vous devez vous rendre dans le coin inférieur droit du labyrinthe pour gagner.");
             WriteLine("Bonne chance!");
+            int endX = CursorLeft;
+            int endY = CursorTop;
             const char toWrite = '*'; // Character to write on-screen.
 
             int x = 2, y = 1; // Contains current cursor position.
 
-            ToWrite(toWrite, x, y); // Write the character on the default location (0,0).
+            ToWrite(toWrite, x, y); // Write the character on the default location (2,1).
 
-            while (true)
+            while (x < grid.MaxX || y < grid.MaxY)
             {
                 if (Console.KeyAvailable)
                 {
@@ -117,22 +119,40 @@ namespace TestMaze
                     switch (command)
                     {
                         case ConsoleKey.DownArrow:
-                            y += 2;
+                            if(y + 2 <= grid.MaxY)
+                            {
+                                if(grid.IsLinked(x, y, "s"))
+                                {
+                                    y += 2;
+                                }
+                            }
                             break;
                         case ConsoleKey.UpArrow:
-                            if (y > 0)
+                            if (y > grid.MinY)
                             {
-                                y -= 2;
+                                if (grid.IsLinked(x, y, "n"))
+                                {
+                                    y -= 2;
+                                }
                             }
                             break;
                         case ConsoleKey.LeftArrow:
-                            if (x > 0)
+                            if (x > grid.MinX)
                             {
-                                x -= 4;
+                                if (grid.IsLinked(x, y, "w"))
+                                {
+                                    x -= 4;
+                                }
                             }
                             break;
                         case ConsoleKey.RightArrow:
-                            x += 4;
+                            if(x + 4 <= grid.MaxX)
+                            {
+                                if (grid.IsLinked(x, y, "e"))
+                                {
+                                    x += 4;
+                                }
+                            }
                             break;
                     }
 
@@ -143,6 +163,7 @@ namespace TestMaze
                     Thread.Sleep(100);
                 }
             }
+            AffichageFin(endX, endY);
         }
 
         public static void ToWrite(char toWrite, int x = 0, int y = 0)
@@ -157,6 +178,29 @@ namespace TestMaze
             }
             catch (Exception)
             {
+            }
+        }
+
+        private void AffichageFin(int endX, int endY)
+        {
+            string choix = "";
+            SetCursorPosition(endX, endY + 1);
+            WriteLine("Vous avez gagné!");
+            Write("Voulez-vous rejouer (O ou N)?");
+            choix = Console.ReadLine().ToUpper();
+            if(choix == "O")
+            {
+                CreerLabyrinthe lab = new CreerLabyrinthe();
+            }else if(choix == "N"){
+                WriteLine("Merci d'avoir joué!");
+                Thread.Sleep(1500);
+                Environment.Exit(0);
+            }
+            else
+            {
+                WriteLine("Choix incorrect! Bye-bye!");
+                Thread.Sleep(1500);
+                Environment.Exit(0);
             }
         }
     }

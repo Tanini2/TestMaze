@@ -10,6 +10,8 @@ namespace TestMaze
     {
         public int Row { get; }
         public int Column { get; }
+        public int PositionX { get; set; }
+        public int PositionY { get; set; }
 
         //Cellules voisines
         public Cell North { get; set; }
@@ -27,10 +29,12 @@ namespace TestMaze
         private readonly Dictionary<Cell, bool> _links;
         public List<Cell> Links => _links.Keys.ToList();
 
-        public Cell(int row, int col)
+        public Cell(int row, int col, int x, int y)
         {
             Row = row;
             Column = col;
+            PositionX = x;
+            PositionY = y;
             _links = new Dictionary<Cell, bool>();
         }
         
