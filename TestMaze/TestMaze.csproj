@@ -49,9 +49,9 @@
     <Compile Include="CreerLabyrinthe.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="Grid.cs" />
-    <Compile Include="ListExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shuffle.cs" />
     <Compile Include="SideWinder.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -14,11 +14,12 @@ namespace TestMaze
         {
             Menu1();
             Menu2();
+            AfficherLabyrinthe();
         }
 
         private void Menu1()
         {
-            string choix;
+            string choix = "";
             Console.Clear();
             WriteLine("****BIENVENUE AU LABYRINTHE!****");
             WriteLine("Choisissez un labyrinthe :");
@@ -33,7 +34,8 @@ namespace TestMaze
 
         private void Menu2()
         {
-            string choix;
+            string choix = "";
+            Console.Clear();
             WriteLine("Choisissez le type de labyrinthe désiré :");
             WriteLine("1 - Binary Tree");
             WriteLine("2 - SideWinder");
@@ -67,16 +69,30 @@ namespace TestMaze
             switch (choix)
             {
                 case "1":
-                    
+                    BinaryTree.Maze(grid);
                     break;
                 case "2":
-
+                    SideWinder.Maze(grid);
                     break;
                 default:
                     Write("Choix incorrect!");
                     Menu2();
                     break;
             }
+        }
+
+        private void AfficherLabyrinthe()
+        {
+            string menu = "";
+            Console.Clear();
+            WriteLine("Voici votre labyrinthe!");
+            WriteLine(grid.ToString());
+            do
+            {
+                WriteLine("Pour retourner au menu, appuyez sur 'M'");
+                menu = ReadLine().ToLower();
+            } while (menu != "m");
+            CreerLabyrinthe lab = new CreerLabyrinthe();
         }
     }
 }

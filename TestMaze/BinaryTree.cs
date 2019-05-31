@@ -18,7 +18,8 @@ namespace TestMaze
                 {
                     continue;
                 }
-                //var neighbor = neighbors.Sample(rand);
+                Shuffle.ShuffleList(neighbors);
+                var neighbor = neighbors[0];
                 if (neighbor != null)
                 {
                     cell.Link(neighbor);
