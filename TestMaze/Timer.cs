@@ -7,6 +7,8 @@ using System.Timers;
 
 namespace TestMaze
 {
+    //Timer pouvant être utilisé
+    //Pas implémenté, mais il a été testé et est fonctionnel
     class Timer
     {
         static int seconds = 0;

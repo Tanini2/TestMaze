@@ -20,7 +20,7 @@ namespace TestMaze
             AfficherLabyrinthe();
             
         }
-
+        //Choisir la grosseur du labyrinthe
         private void Menu1()
         {
             string choix = "";
@@ -35,7 +35,7 @@ namespace TestMaze
             InitialiserLabyrinthe(choix);
             
         }
-
+        //Choisir le type de labyrinthe
         private void Menu2()
         {
             string choix = "";
@@ -47,7 +47,7 @@ namespace TestMaze
             choix = ReadLine();
             TypeLabyrinthe(choix);
         }
-
+        //Initialise la grille 
         private void InitialiserLabyrinthe(string choix)
         {
             switch (choix)
@@ -67,7 +67,7 @@ namespace TestMaze
                     break;
             }
         }
-
+        //Choisi le bon algorithme 
         private void TypeLabyrinthe(string choix)
         {
             switch (choix)
@@ -84,7 +84,7 @@ namespace TestMaze
                     break;
             }
         }
-
+        //Affiche le labyrinthe
         private void AfficherLabyrinthe()
         {
             string menu = "";
@@ -98,7 +98,7 @@ namespace TestMaze
             } while (menu != "m");
             CreerLabyrinthe lab = new CreerLabyrinthe();
         }
-
+        //Permet de se déplacer tant que le joueur n'a pas atteint la fin du labyrinthe
         private void Jouer()
         {
             WriteLine("Utilisez les flèches pour vous déplacer.");
@@ -116,6 +116,8 @@ namespace TestMaze
             {
                 if (Console.KeyAvailable)
                 {
+                    char vide = ' ';
+                    ToWrite(vide, x, y);
                     var command = Console.ReadKey().Key;
 
                     switch (command)
@@ -167,7 +169,7 @@ namespace TestMaze
             }
             AffichageFin(endX, endY);
         }
-
+        //Permet d'afficher le caractère du joueur
         public static void ToWrite(char toWrite, int x = 0, int y = 0)
         {
             try
@@ -175,6 +177,7 @@ namespace TestMaze
                 if (x >= 0 && y >= 0) // 0-based
                 {
                     SetCursorPosition(x, y);
+                    ForegroundColor = ConsoleColor.Cyan;
                     Write(toWrite);
                 }
             }
@@ -182,9 +185,10 @@ namespace TestMaze
             {
             }
         }
-
+        //Affiche la fin du jeu lorsque le joueur a gagné
         private void AffichageFin(int endX, int endY)
         {
+            ForegroundColor = ConsoleColor.Green;
             string choix = "";
             SetCursorPosition(endX, endY + 1);
             WriteLine("Vous avez gagné!");

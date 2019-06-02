@@ -8,8 +8,10 @@ namespace TestMaze
 {
     class Grid
     {
+        //Rows et Columns permettent de générer la grille de jeu
         public int Rows { get; }
         public int Columns { get; }
+        //*X et *Y permettent de gérer les déplacements du joueur
         public int MinX { get; private set; }
         public int MinY { get; private set; }
         public int Size => Rows * Columns;
@@ -33,18 +35,6 @@ namespace TestMaze
                 return _grid[row][column];
             }
         }
-
-        //public Cell RandomCell()
-        //{
-        //    var rand = new Random();
-        //    var row = rand.Next(Rows);
-        //    var col = rand.Next(Columns);
-        //    var randomCell = this[row, col];
-        //    if (randomCell == null) {
-        //        throw new InvalidOperationException("random cell is null");
-        //    }
-        //    return randomCell;
-        //}
 
         public IEnumerable<List<Cell>> Row
         {
@@ -81,7 +71,8 @@ namespace TestMaze
             PrepareGrid();
             ConfigureCells();
         }
-
+        //Prépare la grille de jeu
+        //Crée les cellules, leur assigne une row, une column, un x et un y
         private void PrepareGrid()
         {
             int x = 0;
@@ -118,7 +109,7 @@ namespace TestMaze
                 firstX = true;
             }
         }
-
+        //Crée les cellules voisines
         private void ConfigureCells()
         {
             foreach(var cell in Cells)
@@ -129,20 +120,12 @@ namespace TestMaze
                 var y = cell.PositionY;
 
                 cell.North = this[row - 1, col];
-                //cell.North.PositionX = x;
-                //cell.North.PositionY = y - 2;
                 cell.South = this[row + 1, col];
-                //cell.South.PositionX = x;
-                //cell.South.PositionY = y + 2;
                 cell.West = this[row, col - 1];
-                //cell.West.PositionX = x - 4;
-                //cell.West.PositionY = y;
                 cell.East = this[row, col + 1];
-                //cell.East.PositionX = x + 4;
-                //cell.East.PositionY = y;
             }
         }
-
+        //Affiche la grille de jeu
         public override string ToString()
         {
             var output = new StringBuilder("+");
@@ -184,7 +167,8 @@ namespace TestMaze
 
             return output.ToString();
         }
-
+        //Vérifie à l'aide des coordonnées x et y dans quelle cellule le joueur se trouve
+        //Vérifie si la cellule est liée avec celle de la direction choisie par le joueur
         public bool IsLinked(int x, int y, string direction)
         {
             bool deplacementOk = false;

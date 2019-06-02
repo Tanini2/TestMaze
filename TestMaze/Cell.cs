@@ -8,8 +8,10 @@ namespace TestMaze
 {
     class Cell
     {
+        //Les Row et Column permettent de créer la grille
         public int Row { get; }
         public int Column { get; }
+        //La position X et Y permet de gérer le déplacement du joueur dans la grille
         public int PositionX { get; set; }
         public int PositionY { get; set; }
 
@@ -37,7 +39,7 @@ namespace TestMaze
             PositionY = y;
             _links = new Dictionary<Cell, bool>();
         }
-        
+        //Fait le lien entre deux cellules
         public void Link(Cell cell, bool bidirectional = true)
         {
             _links[cell] = true;
@@ -46,7 +48,7 @@ namespace TestMaze
                 cell.Link(this, false);
             }
         }
-
+        //Enlève le lien entre deux cellules 
         public void Unlink(Cell cell, bool bidirectional = true)
         {
             _links.Remove(cell);
@@ -55,7 +57,7 @@ namespace TestMaze
                 cell.Unlink(this, false);
             }
         }
-
+        //Permet de savoir si la cellule est liée avec celle que l'on passe en paramètre
         public bool IsLinked(Cell cell)
         {
             if (cell == null)

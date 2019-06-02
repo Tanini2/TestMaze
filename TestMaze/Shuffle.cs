@@ -9,7 +9,7 @@ namespace TestMaze
     public static class Shuffle
     {
         private static Random random = new Random();
-
+        //Choisi une cellule au hasard parmi une liste en paramètre
         public static void ShuffleList<E>(IList<E> list)
         {
             if (list.Count > 1)
